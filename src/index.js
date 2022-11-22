@@ -24,7 +24,7 @@ function onSubmit(event) {
   event.preventDefault();
   clearImages();
 
-  neededData = refs.input.value.trim();
+  const neededData = refs.input.value.trim();
   if (neededData) {
     fetchImg(neededData, pageNumber).then(dataFound => {
       if (!dataFound.hits.length) {
