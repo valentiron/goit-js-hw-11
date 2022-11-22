@@ -58,6 +58,7 @@ function onLoadMore() {
         `Hooray! We found ${foundData.totalHits} images.`
       );
       refs.moreBtn.style.display = 'block';
+      lightboxGallery.refresh();
     }
   });
 }
