@@ -63,31 +63,6 @@ function onLoadMore() {
   });
 }
 
-// function createImgList(images) {
-//     const imgMarkup = images
-//     .map(image => {
-//         return `<div class="photo-box">
-//         <a href=${image.largeImageURL}><img class="photo" src="${image.webformatURL}" alt="${image.tags}" title="${image.tags}" loading="lazy"/></a>
-//         <div class="info-box">
-//             <p class="info-text"> 
-//             Likes <span class="info-backend">${image.likes}</span>
-//             </p>
-//             <p class="info-text"> 
-//             Views <span class="info-backend">${image.views}</span>
-//             </p>
-//             <p class="info-text"> 
-//             Comments <span class="info-backend">${image.comments}</span>
-//             </p>
-//             <p class="info-text"> 
-//             Downloads <span class="info-backend">${image.downloads}</span>
-//             </p>
-//         </div>
-//     </div> `;
-//     }).join('');
-//     refs.gallery.innerHTML += imgMarkup;
-// }
-
-
 function createImgList(images) {
   console.log(images, 'images');
   const markup = images
