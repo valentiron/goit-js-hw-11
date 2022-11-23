@@ -47,7 +47,7 @@ function onLoadMore() {
   pageNumber++;
   const neededData = refs.input.value.trim();
   refs.moreBtn.style.display = 'none';
-  createImgList(neededData, pageNumber).then(dataFound => {
+  fetchImg(neededData, pageNumber).then(dataFound => {
     if (!dataFound.hits.length) {
       Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
@@ -55,7 +55,7 @@ function onLoadMore() {
     } else {
       createImgList(dataFound.hits);
       Notify.success(
-        `Hooray! We found ${foundData.totalHits} images.`
+        `Hooray! We found ${dataFound.totalHits} images.`
       );
       refs.moreBtn.style.display = 'block';
       lightboxGallery.refresh();
@@ -63,28 +63,56 @@ function onLoadMore() {
   });
 }
 
+// function createImgList(images) {
+//     const imgMarkup = images
+//     .map(image => {
+//         return `<div class="photo-box">
+//         <a href=${image.largeImageURL}><img class="photo" src="${image.webformatURL}" alt="${image.tags}" title="${image.tags}" loading="lazy"/></a>
+//         <div class="info-box">
+//             <p class="info-text"> 
+//             Likes <span class="info-backend">${image.likes}</span>
+//             </p>
+//             <p class="info-text"> 
+//             Views <span class="info-backend">${image.views}</span>
+//             </p>
+//             <p class="info-text"> 
+//             Comments <span class="info-backend">${image.comments}</span>
+//             </p>
+//             <p class="info-text"> 
+//             Downloads <span class="info-backend">${image.downloads}</span>
+//             </p>
+//         </div>
+//     </div> `;
+//     }).join('');
+//     refs.gallery.innerHTML += imgMarkup;
+// }
+
+
 function createImgList(images) {
-    const imgMarkup = images
+  console.log(images, 'images');
+  const markup = images
     .map(image => {
-        return `<div class="photo-box">
-        <a href=${image.largeImageURL}><img class="photo" src="${image.webformatURL}" alt="${image.tags}" title="${image.tags}" loading="lazy"/></a>
+      console.log('img', image);
+      return `<div class="photo-box">
+       <a href="${image.largeImageURL}"><img class="photo" src="${image.webformatURL}" alt="${image.tags}" title="${image.tags}" loading="lazy"/></a>
         <div class="info-box">
-            <p class="info-text"> 
-            Likes <span class="info-backend">${image.likes}</span>
+           <p class="info-text">
+    <b>Likes</b> <span class="info-backend"> ${image.likes} </span>
+</p>
+            <p class="info-text">
+                <b>Views</b> <span class="info-backend">${image.views}</span>  
             </p>
-            <p class="info-text"> 
-            Views <span class="info-backend">${image.views}</span>
+            <p class="info-text">
+                <b>Comments</b> <span class="info-backend">${image.comments}</span>  
             </p>
-            <p class="info-text"> 
-            Comments <span class="info-backend">${image.comments}</span>
-            </p>
-            <p class="info-text"> 
-            Downloads <span class="info-backend">${image.downloads}</span>
+            <p class="info-text">
+                <b>Downloads</b> <span class="info-backend">${image.downloads}</span> 
             </p>
         </div>
-    </div> `;
-    }).join('');
-    refs.gallery.innerHTML += imgMarkup;
+    </div>`;
+    })
+    .join('');
+  refs.gallery.innerHTML += markup;
 }
 
 function clearImages() {
